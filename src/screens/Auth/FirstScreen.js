@@ -12,6 +12,8 @@ import {
 import RegisterButton from '../../components/RegisterButton';
 import LoginButton from '../../components/LoginButton';
 
+import auth from '@react-native-firebase/auth';
+
 const FirstScreen = (props) => {
   return (
     <>

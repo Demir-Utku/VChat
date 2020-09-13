@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, ActivityIndicator, Dimensions } from 'react-native';
 import RegisterButton from '../../components/RegisterButton';
 import Input from '../../components/Input';
+import Messages from '../Home/Messages'
 
 const {width, height} = Dimensions.get('window');
 

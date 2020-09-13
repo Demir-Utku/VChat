@@ -86,6 +86,7 @@
 
 
 import React, { useEffect } from 'react';
+import {View} from 'react-native';
 import Router from './src/Router';
 //import SplashScreen from 'react-native-splash-screen'
 //import { createStore, applyMiddleware } from 'redux';
@@ -104,7 +105,7 @@ const App = () => {
 
   return (
     //<Provider store={store}>
-      <Router />
+        <Router />
     //</Provider>
   )
 }
