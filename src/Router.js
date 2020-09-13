@@ -6,13 +6,14 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from  '@react-navigation/stack';
 import Messages from './screens/Home/Messages';
-
+import Contacts from './screens/Home/Contacts';
+import Menu from './screens/Menu/Menu';
 import FirstScreen from './screens/Auth/FirstScreen';
 import Login from './screens/Auth/Login';
 import Register from './screens/Auth/Register';
 
 const Stack = createStackNavigator();
-  
+
 function Root() {
   return (
     <Stack.Navigator initialRouteName="FirstScreen">
@@ -27,9 +28,15 @@ const Drawer = createDrawerNavigator();
 function Common() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Root">
-        <Drawer.Screen name="Messages" component={Messages} />
+      <Drawer.Navigator drawerContent={Menu}
+        drawerType='back'
+        drawerStyle={{
+            width: '75%',
+        }}
+      >
         <Drawer.Screen name="Root" component={Root} />
+        <Drawer.Screen name="Messages" component={Messages} />
+        <Drawer.Screen name="Contacts" component={Contacts} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
