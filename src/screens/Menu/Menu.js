@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
+
 const Menu = (props) => {
+
   return (
     <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'gray' }}>
       {/* Profile image */}
@@ -31,12 +33,19 @@ const Menu = (props) => {
 
       {/* Signout */}
       <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-        <Image style={styles.logout}
-          source={require('../../images/exit.png')} />
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('FirstScreen')
+          }}
+        >
+          <Image
+            style={styles.logout}
+            source={require('../../images/exit.png')} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )
-};
+}
 
 const styles = StyleSheet.create({
   logo: {
@@ -59,6 +68,6 @@ const styles = StyleSheet.create({
   contacts: {
     fontSize: 16,
   }
-});
+})
 
 export default Menu;

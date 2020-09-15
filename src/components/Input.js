@@ -1,7 +1,8 @@
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const Input = (props) => (
+const Input = (props) => {
+  return (
     <TextInput
         placeholder={props.placeholder}
         placeholderTextColor = "white"
@@ -17,8 +18,10 @@ const Input = (props) => (
             color: 'white',
             backgroundColor: 'black',
             borderRadius: 5,
+            borderWidth: 3,
         }, props.style]}
     />
-);
+  );
+}
 
 export default Input;

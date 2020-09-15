@@ -1,14 +1,19 @@
-import React from 'react'
-import { Text, View, SafeAreaView, FlatList } from 'react-native'
-
-const Contacts = () => {
-  return (
-    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#23272A' }}>
-      <FlatList>
-        
-      </FlatList>
-    </SafeAreaView>
-  );
+import React, { Component } from 'react';
+import { View, Text, SafeAreaView, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
+import FlatListComponent from '../../components/FlatListComponent';
+export default class Contacts extends Component {
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <FlatListComponent />
+      </SafeAreaView>
+    );
+  }
 }
 
-export default Contacts;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#23272A',
+  },
+});

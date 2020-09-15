@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,15 +6,33 @@ import {
   View,
   Text,
   StatusBar,
-  Image
+  Image,
+  ActivityIndicator
 } from 'react-native';
 
 import RegisterButton from '../../components/RegisterButton';
 import LoginButton from '../../components/LoginButton';
 
+import { Icon } from 'native-base'
 import auth from '@react-native-firebase/auth';
 
+import { connect } from 'react-redux';
+import { isUser } from '../../actions'
+import * as RootNavigation from '../../RootNavigation';
+
 const FirstScreen = (props) => {
+  useEffect(() => {
+    props.isUser()
+  }, [])
+
+  if(props.loading) {
+    return(
+      <View style={{ flex:1 , alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size='large' />
+      </View>
+    )
+  }
+
   return (
     <>
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#23272A' }}>
@@ -75,4 +93,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FirstScreen;
+const mapStateToProps = ({ authResponse }) => {
+  const { loading, user } = authResponse;
+  return { loading, user };
+};
+
+export default connect(mapStateToProps, { isUser })(FirstScreen);
