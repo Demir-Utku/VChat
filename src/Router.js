@@ -5,7 +5,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer'
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from  '@react-navigation/stack';
+
 import Messages from './screens/Home/Messages/Messages';
+import MessageDetail from './screens/Home/Messages/MessageDetail';
+import GetUsers from './screens/Home/Messages/GetUsers';
+
 import Contacts from './screens/Home/Contacts';
 import Menu from './screens/Menu/Menu';
 import FirstScreen from './screens/Auth/FirstScreen';
@@ -87,6 +91,30 @@ const MessagesStackScreen = () => {
               <FontAwesomeIcon icon={ faAngleLeft } size={ 24 } style={{ color: 'white', marginLeft: 2 }} />
             ),
           }}
+      />
+      <MessagesStack.Screen name="MessageDetail" component={MessageDetail}
+        options={{
+            title: 'Messages',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}   
+        />
+      <MessagesStack.Screen name="GetUsers" component={GetUsers}
+        options={{
+          title: 'Messages',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
       />
     </MessagesStack.Navigator>
   )

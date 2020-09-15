@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, FlatList, Image, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getAllUsers, startRoom } from '../../actions'
+import { getAllUsers, startRoom } from '../../../actions'
 
 const GetUsers = (props) => {
 
@@ -55,9 +55,6 @@ const GetUsers = (props) => {
 const styles = {
     text: { padding: 3 }
 }
-
-
-
 
 const mapStateToProps = ({ messageResponse, authResponse }) => {
     const { loadingUsers, allUsers } = messageResponse;

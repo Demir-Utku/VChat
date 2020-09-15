@@ -37,8 +37,9 @@ const FirstScreen = (props) => {
     <>
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#23272A' }}>
         <View style={{ flex: 1, width: '100%', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <Image style={styles.logo}
-            source={require('../../images/discord.png')} />
+          <Image /*style={styles.logo}*/
+            style={{ borderRadius: 28 }}
+            source={require('../../images/logo.png')} />
         </View>
 
         <View style={{ flex: 1, width: '100%', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -49,7 +50,8 @@ const FirstScreen = (props) => {
             color: 'white',
             marginBottom: 15,
           }}>
-            Welcome to Discord
+            Welcome to
+            <Text style={{ color: 'rgb(89, 175, 226)', fontWeight: 'bold' }}> VCHAT</Text>
           </Text>
 
           <Text style={{
@@ -60,7 +62,7 @@ const FirstScreen = (props) => {
             marginBottom: 30,
             width: '85%',
           }}>
-            Join over 100 million people who use Discord to talk with communities and friends.
+            Connect to the World!
           </Text>
         </View>
 
