@@ -1,10 +1,12 @@
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const Input = (props) => (
+const Input = (props) => {
+  return (
     <TextInput
         placeholder={props.placeholder}
         placeholderTextColor = "white"
+        placeholderStyle={props.placeholderStyle}
         secureTextEntry={props.secureTextEntry}
         keyboardType={props.keyboardType}
         multiline={props.multiline}
@@ -17,8 +19,10 @@ const Input = (props) => (
             color: 'white',
             backgroundColor: 'black',
             borderRadius: 5,
+            borderWidth: 3,
         }, props.style]}
     />
-);
+  );
+}
 
 export default Input;

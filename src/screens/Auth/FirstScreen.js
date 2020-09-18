@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,19 +6,40 @@ import {
   View,
   Text,
   StatusBar,
-  Image
+  Image,
+  ActivityIndicator
 } from 'react-native';
 
 import RegisterButton from '../../components/RegisterButton';
 import LoginButton from '../../components/LoginButton';
 
+import { Icon } from 'native-base'
+import auth from '@react-native-firebase/auth';
+
+import { connect } from 'react-redux';
+import { isUser } from '../../actions'
+import * as RootNavigation from '../../RootNavigation';
+
 const FirstScreen = (props) => {
+  useEffect(() => {
+    props.isUser()
+  }, [])
+
+  if(props.loading) {
+    return(
+      <View style={{ flex:1 , alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size='large' />
+      </View>
+    )
+  }
+
   return (
     <>
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#23272A' }}>
         <View style={{ flex: 1, width: '100%', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <Image style={styles.logo}
-            source={require('../../images/discord.png')} />
+          <Image /*style={styles.logo}*/
+            style={{ borderRadius: 28 }}
+            source={require('../../images/logo.png')} />
         </View>
 
         <View style={{ flex: 1, width: '100%', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -29,7 +50,8 @@ const FirstScreen = (props) => {
             color: 'white',
             marginBottom: 15,
           }}>
-            Welcome to Discord
+            Welcome to
+            <Text style={{ color: 'rgb(89, 175, 226)', fontWeight: 'bold' }}> VCHAT</Text>
           </Text>
 
           <Text style={{
@@ -40,7 +62,7 @@ const FirstScreen = (props) => {
             marginBottom: 30,
             width: '85%',
           }}>
-            Join over 100 million people who use Discord to talk with communities and friends.
+            Connect to the World!
           </Text>
         </View>
 
@@ -73,4 +95,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FirstScreen;
+const mapStateToProps = ({ authResponse }) => {
+  const { loading, user } = authResponse;
+  return { loading, user };
+};
+
+export default connect(mapStateToProps, { isUser })(FirstScreen);

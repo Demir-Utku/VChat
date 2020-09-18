@@ -6,7 +6,7 @@ const RegisterButton = (props) => (
     activeOpacity={0.8}
     onPress={props.onPress}
     style={[{
-      backgroundColor: '#7289DA',
+      backgroundColor: 'rgb(79, 155, 226)',
       width: 380,
       height: 50,
       alignItems: 'center',
