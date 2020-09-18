@@ -100,7 +100,7 @@ const MessagesStackScreen = () => {
       />
       <MessagesStack.Screen name="MessageDetail" component={MessageDetail}
         options={{
-            title: 'Message Details',
+            title: "Message Details",
             headerStyle: {
               backgroundColor: '#f4511e',
             },
@@ -186,10 +186,13 @@ const TabStackScreen = () => {
         screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
-                if (route.name === 'ContactScreen') {
-                    iconName = 'home'
+                if(route.name === 'Messages') {
+                  iconName = 'home'
+                }
+                else if (route.name === 'ContactScreen') {
+                    iconName = 'address-book'
                 } else if (route.name === 'Favorites') {
-                    iconName = 'search';
+                    iconName = 'heart';
                 } 
 
                 return <Icon type='FontAwesome' name={iconName} 
@@ -201,15 +204,9 @@ const TabStackScreen = () => {
             showLabel: false,
         }}
     >
-        <TabStack.Screen name="ContactScreen" component={ContactStackScreen}>
-          <Icon name="home" />
-          <Text>Contacts</Text>
-        </TabStack.Screen>
-
-        <TabStack.Screen name="Favorites" component={FavoriteStackScreen}>
-          <Icon name="heart" />
-          <Text>Favorites</Text>
-        </TabStack.Screen>
+        <TabStack.Screen name="Messages" component={MessagesStackScreen} />
+        <TabStack.Screen name="ContactScreen" component={ContactStackScreen} />
+        <TabStack.Screen name="Favorites" component={FavoriteStackScreen} />
 
         {/*<Button
           vertical
@@ -242,20 +239,6 @@ const DrawerStackScreen = (props) => {
             width: '75%',
         }}
       >
-      
-        <Drawer.Screen name="Root" component={Root} 
-          options={{
-            title: 'Root',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Drawer.Screen name="Messages" component={MessagesStackScreen} />
         <Drawer.Screen name="Drawer" component={TabStackScreen} />
       </Drawer.Navigator>
   );
@@ -278,8 +261,6 @@ function Router(props) {
                     animationEnabled: false
                   }}
                 />
-
-                <RootStack.Screen name="ContactScreen" component={ContactScreen} />
               </>
 
             ) :

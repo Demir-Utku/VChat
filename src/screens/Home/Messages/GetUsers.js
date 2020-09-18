@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getAllUsers, startRoom } from '../../../actions'
 
-const GetUsers = (props) => {
+const count = 0;
 
+const GetUsers = (props) => {
     useEffect(() => {
         props.getAllUsers()
     }, [])
@@ -13,7 +14,7 @@ const GetUsers = (props) => {
     return (
         <View style={{ flex: 1 }}>
             <FlatList
-                style={{ flex: 1, backgroundColor: 'white', }}
+                style={{ flex: 1, backgroundColor: 'white' }}
                 data={props.allUsers}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
@@ -25,7 +26,6 @@ const GetUsers = (props) => {
                                 const second_user = item
                                 const path = props.user.userName + '+' + second_user.userName
                                 const params = {
-                                    profile_url: props.user.profile_image,
                                     userName: props.user.userName,
                                     createdDate: new Date(),
                                     first_user: props.user,
@@ -36,14 +36,10 @@ const GetUsers = (props) => {
                                 props.navigation.navigate('MessageDetail', { path })
                             }}
                             style={{ flexDirection: 'row', margin: 10, borderBottomWidth: 0.4, borderBottomColor: 'gray' }}>
-                            <Image
-                                source={{ uri: item.profile_url }}
-                                style={{ width: 50, height: 50, borderRadius: 25 }} />
 
                             <View style={{ padding: 10 }}>
-                                <Text style={{ fontSize: 16 }}>@{item.userName}</Text>
+                                <Text style={{ fontSize: 16 }}>{!item.userName ? '' : '@' }{item.userName}</Text>
                             </View>
-
                         </TouchableOpacity>
                     )
                 }}

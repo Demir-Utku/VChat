@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native';
+
+const {width, height} = Dimensions.get('window')
 
 const RegisterButton = (props) => (
   <TouchableOpacity
@@ -7,8 +9,8 @@ const RegisterButton = (props) => (
     onPress={props.onPress}
     style={[{
       backgroundColor: 'rgb(79, 155, 226)',
-      width: 380,
-      height: 50,
+      width: width * 0.9,
+      height: height * 0.06,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 5

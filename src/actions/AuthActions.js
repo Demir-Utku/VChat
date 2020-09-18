@@ -75,6 +75,7 @@ export const register = (params) => {
   return (dispatch) => {
     if (params.email != '' && params.password != '' && params.userName != '') {
       if (validateEmail(params.email)) {
+        dispatch({ type: REGISTER_START })
         auth()
         .createUserWithEmailAndPassword(params.email, params.password)
         .then((data) => {
@@ -90,8 +91,10 @@ export const register = (params) => {
             .set(setData)
             .then(() => {
                 console.log('User added!');
-                RootNavigation.pop()
+                dispatch({ type: REGISTER_SUCCESS })
+                //RootNavigation.pop()
             }).catch(() => {
+                dispatch({ type: REGISTER_FAILD })
                 console.log('User not Add!');
             })
 
@@ -101,6 +104,7 @@ export const register = (params) => {
             console.log('That email address is already in use!');
           }
           console.log(error);
+          dispatch({ type: REGISTER_FAILD })
         });
 
       } else {
@@ -128,11 +132,11 @@ export const isUser = () => {
 }
 
 export const signOut = () => {
-  return (dispatch) => {
+  return () => {
     auth()
       .signOut()
       .then(() => {
-        dispatch({ type: SIGN_OUT_SUCCESS })
+        console.log('User signed out!');
       });
   }
 }

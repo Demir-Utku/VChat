@@ -20,7 +20,7 @@ const MessageItems = (props) => {
                 style={{ width: 50, height: 50, borderRadius: 25 }} />
 
             <View style={{ padding: 10 }}>
-                <Text style={{ fontSize: 16 }}>@{isSecond ? props.data.first_user.userName: props.data.second_user.userName}</Text>
+                <Text style={{ fontSize: 16, color: 'white' }}>@{isSecond ? props.data.first_user.userName: props.data.second_user.userName}</Text>
             </View>
 
         </TouchableOpacity>

@@ -39,7 +39,6 @@ export const startRoom = (path,params) => {
                 dispatch({ type: ADD_ROOM_FAILD })
                 console.log('room not get!');
             })
-
     }
 }
 
@@ -61,7 +60,6 @@ export const getRooms = () => {
     }
 }
 
-
 export const getMessages = (path) => {
     return (dispatch) => {
         dispatch({ type: GET_MESSAGES_START });
@@ -71,13 +69,12 @@ export const getMessages = (path) => {
             message.forEach((doc) => {
                 data.push(doc.data())
             });
-            console.log('gelene mesaj datası: ', data);
+            console.log('gelen mesaj datası: ', data);
             dispatch({ type: GET_MESSAGES_SUCCESS, payload: data });
 
         });
     }
 }
-
 
 export const addMessages = (path,params) => {
     return (dispatch) => {
@@ -100,7 +97,7 @@ export const addMessages = (path,params) => {
 
                             firestore().collection('Messages').doc(path).collection('items').doc(messageId).update({ image: imageURL }).then(() => {
                                 //dispatch({ type: ADD_MESSAGES_SUCCESS, payload: params })
-                                RootNavigation.pop()
+                                //RootNavigation.pop()
                             })
                         })
                     }).catch(error => {
@@ -115,10 +112,8 @@ export const addMessages = (path,params) => {
                 //dispatch({ type: ADD_MESSAGES_FAILD })
                 console.log('Message not send!');
             })
-
     }
 }
-
 
 export const getAllUsers = () => {
     return (dispatch) => {

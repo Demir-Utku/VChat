@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native';
+
+const {width, height} = Dimensions.get('window')
 
 const LoginButton = (props) => (
   <TouchableOpacity
@@ -7,8 +9,8 @@ const LoginButton = (props) => (
     onPress={props.onPress}
     style={[{
       backgroundColor: '#2C2F33',
-      width: 380,
-      height: 50,
+      width: width * 0.9,
+      height: height * 0.06,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 5

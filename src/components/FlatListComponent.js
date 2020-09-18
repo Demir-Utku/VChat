@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
-
+import { Right, Icon } from 'native-base';
 import data from '../../data';
 export default class FlatListComponent extends Component {
   state = {

@@ -18,9 +18,9 @@ const Messages = (props) => {
     }, [])
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#23272A' }}>
         <FlatList
-          style={{ flex: 1, backgroundColor: 'white', }}
+          style={{ flex: 1, backgroundColor: '#23272A', }}
           data={props.rooms}
           keyExtractor={(item, index) => index.toString()}
           ListEmptyComponent={() => {

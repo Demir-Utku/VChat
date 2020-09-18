@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
-
+import auth from '@react-native-firebase/auth';
 const { width, height } = Dimensions.get('window');
-
 
 const Menu = (props) => {
 
@@ -35,7 +34,8 @@ const Menu = (props) => {
       <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('FirstScreen')
+            auth().signOut()
+            props.navigation.pop()
           }}
         >
           <Image

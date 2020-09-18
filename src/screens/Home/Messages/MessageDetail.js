@@ -59,7 +59,7 @@ const MessageDetail = (props) => {
                         console.log('Liste gelen: ', item);
                         let isMe = props.user.userName == item.sender_user.userName
 
-                        const user_first_letter = !isMe  ? item.sender_user.userName.charAt(0) : ''
+                        const user_first_letter = !isMe ? item.sender_user.userName.charAt(0) : ''
 
                         return (
                             <View>
