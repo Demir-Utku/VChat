@@ -10,13 +10,13 @@ export default class FlatListComponent extends Component {
 
   renderContactsItem = ({item, index}) => {
     return (
-      <TouchableOpacity style={[styles.itemContainer], { backgroundColor: index % 2 == 1 ? '#fafafa' : ''  }}>
-        <Image 
+      <TouchableOpacity style={[styles.itemContainer]}>
+        <Image
           style={styles.avatar}
-          source={{ uri: item.picture }} />
+          source={{ uri: item.image }} />
         <View style={styles.textContainer}>
-          <Text style={[styles.name], {color: index % 2 == 0 ? '#fafafa' : ''}}>{item.name}</Text>
-          <Text style={{ color: index % 2 == 0 ? '#fafafa' : '' }}>{item.company}</Text>
+          <Text style={[styles.name], {color: '#fafafa'}}>{item.first_name}</Text>
+          <Text style={{ color: '#fafafa' }}>{item.last_name}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -24,7 +24,7 @@ export default class FlatListComponent extends Component {
 
   searchFilter = text => {
     const newData = data.filter(item => {
-      const listItems = `${item.name.toLowerCase()} ${item.company.toLowerCase()}`
+      const listItems = `${item.first_name.toLowerCase()}`
       return listItems.indexOf(text.toLowerCase()) > -1;
     });
 
@@ -56,7 +56,7 @@ export default class FlatListComponent extends Component {
       <FlatList
         ListHeaderComponent={this.renderHeader()}
         renderItem={this.renderContactsItem}
-        keyExtractor={item => item._id}
+        keyExtractor={item => item.id}
         data={this.state.contacts}
         />
     );

@@ -17,14 +17,12 @@ const INITIAL_STATE = {
 };
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-
         case LOGIN_START:
         case REGISTER_START:
             return {
                 ...state,
                 loading: true,
             };
-
 
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
@@ -46,7 +44,6 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 user: null,
             };
-
 
         default:
             return state;

@@ -6,7 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from  '@react-navigation/stack';
 import Messages from './screens/Home/Messages/Messages';
-import Contacts from './screens/Home/Contacts';
+import Contacts from './screens/Home/Contacts/Contacts';
 import Menu from './screens/Menu/Menu';
 import FirstScreen from './screens/Auth/FirstScreen';
 import Login from './screens/Auth/Login';

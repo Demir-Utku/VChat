@@ -87,7 +87,7 @@
 
 import React, { useEffect } from 'react';
 import {View} from 'react-native';
-import Router from './src/Router';
+import Router from './src/Router3';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';

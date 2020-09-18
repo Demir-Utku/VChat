@@ -6,6 +6,7 @@ const Input = (props) => {
     <TextInput
         placeholder={props.placeholder}
         placeholderTextColor = "white"
+        placeholderStyle={props.placeholderStyle}
         secureTextEntry={props.secureTextEntry}
         keyboardType={props.keyboardType}
         multiline={props.multiline}

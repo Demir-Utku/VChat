@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, FlatList, Image, ActivityIndicator, Alert, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, ActivityIndicator, Alert, StyleSheet, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Fab, Icon } from 'native-base';

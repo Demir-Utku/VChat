@@ -26,6 +26,7 @@
     "@react-navigation/drawer": "^5.9.0",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
+    "json-server": "^0.16.1",
     "native-base": "^2.13.14",
     "react": "16.13.1",
     "react-native": "0.63.2",

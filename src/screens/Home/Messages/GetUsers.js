@@ -22,10 +22,11 @@ const GetUsers = (props) => {
                         <TouchableOpacity
                             onPress={() => {
                                 console.log('User: ', props.user);
-
                                 const second_user = item
-                                const path = props.user.username + '+' + second_user.username
+                                const path = props.user.userName + '+' + second_user.userName
                                 const params = {
+                                    profile_url: props.user.profile_image,
+                                    userName: props.user.userName,
                                     createdDate: new Date(),
                                     first_user: props.user,
                                     second_user,
@@ -36,12 +37,11 @@ const GetUsers = (props) => {
                             }}
                             style={{ flexDirection: 'row', margin: 10, borderBottomWidth: 0.4, borderBottomColor: 'gray' }}>
                             <Image
-                                source={{ uri: item.profile_image }}
+                                source={{ uri: item.profile_url }}
                                 style={{ width: 50, height: 50, borderRadius: 25 }} />
 
                             <View style={{ padding: 10 }}>
-                                <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.name}</Text>
-                                <Text style={{ fontSize: 12 }}>@{item.username}</Text>
+                                <Text style={{ fontSize: 16 }}>@{item.userName}</Text>
                             </View>
 
                         </TouchableOpacity>

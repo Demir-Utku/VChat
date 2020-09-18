@@ -24,8 +24,8 @@ const Menu = (props) => {
       </View>
 
       <View>
-      <TouchableOpacity onPress={() => {
-            props.navigation.navigate('Contacts')
+        <TouchableOpacity onPress={() => {
+            props.navigation.navigate('ContactScreen')
         }}>
           <Text style={styles.contacts}>Contacts</Text>
         </TouchableOpacity>
