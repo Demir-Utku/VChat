@@ -1,37 +1,35 @@
+/* eslint-disable react-native/no-inline-styles */
 import 'react-native-gesture-handler';
-import React from 'react'
-import { View, Text, Dimensions, ActivityIndicator, Animated } from 'react-native'
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer'
-//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import {createStackNavigator} from  '@react-navigation/stack';
+import {Icon} from 'native-base';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import Messages from './screens/Home/Messages/Messages';
 import MessageDetail from './screens/Home/Messages/MessageDetail';
 import GetUsers from './screens/Home/Messages/GetUsers';
 
-import Contacts from './screens/Home/Contacts/Contacts';
+import ContactScreen from './screens/Home/Contacts/Contacts';
 import Menu from './screens/Menu/Menu';
+
 import FirstScreen from './screens/Auth/FirstScreen';
 import Login from './screens/Auth/Login';
 import Register from './screens/Auth/Register';
 
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import {navigationRef} from './RootNavigation';
 
-import auth from '@react-native-firebase/auth';
-import { navigationRef } from './RootNavigation';
-import { LOCAL_AUTH_ID, USER } from './actions/types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-const { width, height } = Dimensions.get('window');
+const AuthStack = createStackNavigator();
 
-const Stack = createStackNavigator();
-
-function Root() {
+const AuthStackScreen = () => {
   return (
-    <Stack.Navigator initialRouteName="FirstScreen">
-      <Stack.Screen name="FirstScreen" component={FirstScreen} 
+    <AuthStack.Navigator initialRouteName="FirstScreen">
+      <AuthStack.Screen
+        name="FirstScreen"
+        component={FirstScreen}
         options={{
           title: 'Welcome',
           headerStyle: {
@@ -43,7 +41,9 @@ function Root() {
           },
         }}
       />
-      <Stack.Screen name="Login" component={Login}
+      <AuthStack.Screen
+        name="Login"
+        component={Login}
         options={{
           title: 'Login',
           headerStyle: {
@@ -54,8 +54,10 @@ function Root() {
             fontWeight: 'bold',
           },
         }}
-      />    
-      <Stack.Screen name="Register" component={Register}
+      />
+      <AuthStack.Screen
+        name="Register"
+        component={Register}
         options={{
           title: 'Register',
           headerStyle: {
@@ -67,9 +69,9 @@ function Root() {
           },
         }}
       />
-    </Stack.Navigator>
+    </AuthStack.Navigator>
   );
-}
+};
 
 const MessagesStack = createStackNavigator();
 const MessagesStackScreen = () => {
@@ -78,33 +80,6 @@ const MessagesStackScreen = () => {
       <MessagesStack.Screen
         name="Messages"
         component={Messages}
-        options={{
-            title: 'Messages',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerLeft: () => (
-              <FontAwesomeIcon icon={ faAngleLeft } size={ 24 } style={{ color: 'white', marginLeft: 2 }} />
-            ),
-          }}
-      />
-      <MessagesStack.Screen name="MessageDetail" component={MessageDetail}
-        options={{
-            title: 'Messages',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}   
-        />
-      <MessagesStack.Screen name="GetUsers" component={GetUsers}
         options={{
           title: 'Messages',
           headerStyle: {
@@ -116,48 +91,11 @@ const MessagesStackScreen = () => {
           },
         }}
       />
-    </MessagesStack.Navigator>
-  )
-}
-
-const ContactStack = createStackNavigator();
-const ContactStackScreen = () => {
-  return (
-    <ContactStack.Navigator>
-      <ContactStack.Screen
-        name="Contacts"
-        component={Contacts}
+      <MessagesStack.Screen
+        name="MessageDetail"
+        component={MessageDetail}
         options={{
-            title: 'Contacts',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerLeft: () => (
-              <FontAwesomeIcon icon={ faAngleLeft } size={ 24 } style={{ color: 'white', marginLeft: 2 }} />
-            ),
-          }}
-      />
-    </ContactStack.Navigator>
-  )
-}
-
-const Drawer = createDrawerNavigator();
-function Router(props) {
-  return (
-    <NavigationContainer ref={navigationRef}>
-      <Drawer.Navigator drawerContent={(props) => <Menu {...props} />}
-        //drawerType='back'
-        drawerStyle={{
-            width: '75%',
-        }}
-      >
-        <Drawer.Screen name="Root" component={Root} 
-          options={{
-          title: 'Root',
+          title: 'Message Details',
           headerStyle: {
             backgroundColor: '#f4511e',
           },
@@ -166,18 +104,116 @@ function Router(props) {
             fontWeight: 'bold',
           },
         }}
+      />
+      <MessagesStack.Screen
+        name="GetUsers"
+        component={GetUsers}
+        options={{
+          title: 'Get Users',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    </MessagesStack.Navigator>
+  );
+};
+
+const ContactStack = createStackNavigator();
+const ContactStackScreen = () => {
+  return (
+    <ContactStack.Navigator>
+      <ContactStack.Screen
+        name="ContactScreen"
+        component={ContactScreen}
+        options={{
+          title: 'Contacts',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    </ContactStack.Navigator>
+  );
+};
+
+// tab navigation
+const TabStack = createBottomTabNavigator();
+
+const TabStackScreen = () => {
+  return (
+    <TabStack.Navigator
+      initialRouteName="Messages"
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
+          if (route.name === 'Messages') {
+            iconName = 'home';
+          } else if (route.name === 'ContactScreen') {
+            iconName = 'address-book';
+          }
+
+          return (
+            <Icon
+              type="FontAwesome"
+              name={iconName}
+              style={{color: focused ? '#1da1f2' : color, fontSize: size}}
+            />
+          );
+        },
+      })}
+      tabBarOptions={{
+        inactiveTintColor: 'gray',
+        showLabel: false,
+      }}>
+      <TabStack.Screen name="Messages" component={MessagesStackScreen} />
+      <TabStack.Screen name="ContactScreen" component={ContactStackScreen} />
+    </TabStack.Navigator>
+  );
+};
+
+const Drawer = createDrawerNavigator();
+const DrawerStackScreen = () => {
+  return (
+    <Drawer.Navigator
+      drawerContent={(props) => <Menu {...props} />}
+      drawerType="back"
+      drawerStyle={{width: '75%'}}>
+      <Drawer.Screen name="Auth" component={AuthStackScreen} />
+      <Drawer.Screen name="Tab" component={TabStackScreen} />
+    </Drawer.Navigator>
+  );
+};
+
+const RootStack = createStackNavigator();
+
+function Router() {
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <RootStack.Navigator headerMode="none" mode="modal">
+        <RootStack.Screen
+          name="Main"
+          component={DrawerStackScreen}
+          options={{
+            animationEnabled: false,
+          }}
         />
-        <Drawer.Screen name="Messages" component={MessagesStackScreen} />
-        <Drawer.Screen name="Contacts" component={ContactStackScreen} />
-      </Drawer.Navigator>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }
 
-
-const mapStateToProps = ({ authResponse }) => {
-  const { loading, user } = authResponse;
-  return { loading, user };
+const mapStateToProps = ({authResponse}) => {
+  const {loading, user} = authResponse;
+  return {loading, user};
 };
 
 export default connect(mapStateToProps, {})(Router);

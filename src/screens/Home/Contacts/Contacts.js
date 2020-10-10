@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
+import React from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import FlatListComponent from '../../../components/FlatListComponent';
-export default class Contacts extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <FlatListComponent />
-      </SafeAreaView>
-    );
-  }
-}
+
+const Contacts = (props) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatListComponent navigation={props.navigation} />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -17,3 +16,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#23272A',
   },
 });
+
+export default Contacts;

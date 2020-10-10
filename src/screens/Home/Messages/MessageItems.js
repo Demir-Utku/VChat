@@ -1,35 +1,64 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image} from 'react-native';
+import {Text, View, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import * as RootNavigation from '../../../RootNavigation';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 const MessageItems = (props) => {
+  console.log('Coming data: ', props.data);
 
-    console.log('Gelen data: ', props.data);
+  const isSecond = props.data.second_user.userName === props.user.userName;
 
-    const isSecond = props.data.second_user.userName == props.user.userName
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        RootNavigation.navigate('MessageDetail', {data: props.data});
+      }}
+      style={styles.container}>
+      <Image
+        source={{
+          uri: isSecond
+            ? props.data.first_user.profile_url
+            : props.data.second_user.profile_url,
+        }}
+        style={styles.image}
+      />
 
-    return (
-        <TouchableOpacity
-            onPress={() => {
-                RootNavigation.navigate('MessageDetail', { data: props.data  } )
-            }}
-            style={{ flexDirection: 'row', margin: 10, borderBottomWidth: 0.4, borderBottomColor: 'gray' }}>
-            <Image
-                source={{ uri:  isSecond ? props.data.first_user.profile_url : props.data.second_user.profile_url}}
-                style={{ width: 50, height: 50, borderRadius: 25 }} />
-
-            <View style={{ padding: 10 }}>
-                <Text style={{ fontSize: 16, color: 'white' }}>@{isSecond ? props.data.first_user.userName: props.data.second_user.userName}</Text>
-            </View>
-
-        </TouchableOpacity>
-    );
-}
-
-const mapStateToProps = ({ authResponse }) => {
-    const { user } = authResponse;
-    return { user };
+      <View style={styles.textView}>
+        <Text style={styles.text}>
+          @
+          {isSecond
+            ? props.data.first_user.userName
+            : props.data.second_user.userName}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
 };
 
-export default connect(mapStateToProps, { })(MessageItems);
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    margin: 10,
+    borderBottomWidth: 0.4,
+    borderBottomColor: 'gray',
+  },
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  textView: {
+    padding: 10,
+  },
+  text: {
+    fontSize: 16,
+    color: 'white',
+  },
+})
+
+const mapStateToProps = ({authResponse}) => {
+  const {user} = authResponse;
+  return {user};
+};
+
+export default connect(mapStateToProps, {})(MessageItems);

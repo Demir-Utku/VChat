@@ -1,146 +1,213 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, ActivityIndicator, Dimensions, ScrollView, Animated, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+/* eslint-disable no-shadow */
+import React, {useState, useEffect, useRef} from 'react';
+import {
+  View,
+  Text,
+  Dimensions,
+  Animated,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Platform,
+  StyleSheet,
+} from 'react-native';
 import RegisterButton from '../../components/RegisterButton';
 import OutlinedInput from '../../components/OutlinedInput';
 
-import { connect } from 'react-redux';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { register } from '../../actions'
-import { StackActions } from '@react-navigation/native';
-import { LOCAL_AUTH_ID, USER } from '../../actions/types';
-import AsyncStorage from '@react-native-community/async-storage';
-
-import * as RootNavigation from '../../RootNavigation';
+import {connect} from 'react-redux';
+import {register} from '../../actions';
 
 const {width, height} = Dimensions.get('window');
 
 const Register = (props) => {
-  const [userName, setUserName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const animation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Keyboard.addListener("keyboardWillShow", _keyboardWillShow);
-    Keyboard.addListener("keyboardWillHide", _keyboardWillHide);
+    Keyboard.addListener('keyboardWillShow', _keyboardWillShow);
+    Keyboard.addListener('keyboardWillHide', _keyboardWillHide);
 
     return () => {
-      Keyboard.removeListener("keyboardWillShow", _keyboardWillShow);
-      Keyboard.removeListener("keyboardWillHide", _keyboardWillHide);
+      Keyboard.removeListener('keyboardWillShow', _keyboardWillShow);
+      Keyboard.removeListener('keyboardWillHide', _keyboardWillHide);
     };
-
-  }, []);
+  });
 
   const _keyboardWillShow = (e) => {
-    const height = e.endCoordinates.height
+    const h = e.endCoordinates.height;
     Animated.timing(animation, {
-        toValue: -height + 34,
-        duration: 300
+      toValue: -h + 34,
+      duration: 300,
     }).start();
   };
 
   const _keyboardWillHide = (e) => {
     Animated.timing(animation, {
-        toValue: 0,
-        duration: 300
+      toValue: 0,
+      duration: 300,
     }).start();
   };
 
   return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#23272A' }}>
-
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <View style={{ alignItems: 'flex-start', justifyContent: 'center'}}>
-            <Text style={{
-              fontSize: 16, 
-              textAlign: 'left',
-              paddingLeft: width * 0.05,
-              color: 'rgb(206, 207, 208)',
-              marginTop: height * 0.05,
-              marginBottom: height * 0.005,
-            }}>
-              WHAT SHOULD EVERYONE CALL YOU?
-            </Text>
+        <View style={styles.subContainer}>
+          <View style={styles.userName}>
+            <Text style={styles.nameText}>Enter your username</Text>
           </View>
 
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <View style={styles.center}>
             <OutlinedInput
               label={'User Name'}
               value={userName}
+              // eslint-disable-next-line no-shadow
               onChangeText={(userName) => setUserName(userName)}
-              style={{ padding: 5, color: 'white', backgroundColor: 'rgb(35, 39, 42)',
-                borderRadius: 5, /*borderWidth: 3,*/ width: width * 0.75, 
-                height: height * 0.05, marginBottom: height * 0.03 }}
-              theme={{ colors: { text: 'white', primary: 'rgb(33, 151, 186)', background: 'white' } }}
+              style={styles.nameInput}
+              theme={{
+                colors: {
+                  text: 'white',
+                  primary: 'rgb(33, 151, 186)',
+                  background: 'white',
+                },
+              }}
             />
           </View>
 
-          <View style={{ alignItems: 'flex-start', paddingLeft: 5 }}>
-            <Text style={{
-              fontSize: 16,
-              paddingLeft: width * 0.05,
-              textAlign: 'left',
-              color: 'rgb(206, 207, 208)',
-              marginTop: height * 0.005,
-            }}>
-              ACCOUNT INFORMATION
-            </Text>
+          <View style={styles.emailView}>
+            <Text style={styles.emailText}>Enter your email and password</Text>
           </View>
 
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <OutlinedInput
+          <View style={styles.center}>
+            <OutlinedInput
               label={'Email'}
               value={email}
-              keyboardType='email-address'
+              keyboardType="email-address"
               onChangeText={(email) => setEmail(email)}
-              style={{ padding: 5, color: 'white', backgroundColor: 'rgb(35, 39, 42)',
-                borderRadius: 5, /*borderWidth: 3,*/ width: width * 0.75, 
-                height: height * 0.05 }}
-              theme={{ colors: { text: 'white', primary: 'rgb(33, 151, 186)', background: 'white' } }}
+              style={styles.nameInput}
+              theme={{
+                colors: {
+                  text: 'white',
+                  primary: 'rgb(33, 151, 186)',
+                  background: 'white',
+                },
+              }}
             />
             <OutlinedInput
               label={'Password'}
               value={password}
               secureTextEntry
               onChangeText={(password) => setPassword(password)}
-              style={{ padding: 5, color: 'white', backgroundColor: 'rgb(35, 39, 42)',
-                borderRadius: 5, /*borderWidth: 3,*/ width: width * 0.75, 
-                height: height * 0.05, marginBottom: height * 0.01 }}
-              theme={{ colors: { text: 'white', primary: 'rgb(33, 151, 186)', background: 'white' } }}
+              style={styles.nameInput}
+              theme={{
+                colors: {
+                  text: 'white',
+                  primary: 'rgb(33, 151, 186)',
+                  background: 'white',
+                },
+              }}
             />
           </View>
 
-          <View style={{ width: width * 0.8, alignItems: 'center', marginTop: height * 0.02 }}>
-            <Text style={{fontSize: 13, textAlign: 'center',color: 'white', }}>
+          <View style={styles.privacyView}>
+            <Text style={styles.privacyPreText}>
               By registering, you agree to Discord's
-              <Text style={{ color: '#7289DA' }}> Terms of Service </Text>
-              and <Text style={{ color: '#7289DA' }}> Privacy Policy</Text>.
+              <Text style={styles.privacyText}> Terms of Service </Text>
+              and <Text style={styles.privacyText}> Privacy Policy</Text>.
             </Text>
           </View>
 
-          <View style={{ width: width * 0.85, height: height * 0.25, marginTop: height * 0.04, alignItems: 'center' }}>
+          <View style={styles.register}>
             <RegisterButton
               text={'Create an account'}
               onPress={() => {
-                const params = { email, password, userName  }
-                props.register(params)
-                props.navigation.navigate('Login')
+                const params = {email, password, userName};
+                props.register(params);
+                props.navigation.navigate('Login');
               }}
             />
           </View>
         </View>
       </TouchableWithoutFeedback>
-  </KeyboardAvoidingView>
-  )
-}
-
-const mapStateToProps = ({ authResponse }) => {
-  const { loading, user } = authResponse;
-  return { loading, user };
+    </KeyboardAvoidingView>
+  );
 };
 
-export default connect(mapStateToProps, { register })(Register);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#23272A',
+  },
+  subContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  userName: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  nameText: {
+    fontSize: 16,
+    textAlign: 'left',
+    paddingLeft: width * 0.05,
+    color: 'rgb(206, 207, 208)',
+    marginTop: height * 0.05,
+    marginBottom: height * 0.005,
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  nameInput: {
+    padding: 5,
+    color: 'white',
+    backgroundColor: 'rgb(35, 39, 42)',
+    borderRadius: 5,
+    width: width * 0.75,
+    height: height * 0.05,
+    marginBottom: height * 0.03,
+  },
+  emailView: {
+    alignItems: 'flex-start',
+    paddingLeft: 5,
+  },
+  emailText: {
+    fontSize: 16,
+    paddingLeft: width * 0.05,
+    textAlign: 'left',
+    color: 'rgb(206, 207, 208)',
+    marginTop: height * 0.005,
+  },
+  privacyView: {
+    width: width * 0.8,
+    alignItems: 'center',
+    marginTop: height * 0.02,
+  },
+  privacyPreText: {
+    fontSize: 13,
+    textAlign: 'center',
+    color: 'white',
+  },
+  privacyText: {
+    color: '#7289DA',
+  },
+  register: {
+    width: width * 0.85,
+    height: height * 0.25,
+    marginTop: height * 0.04,
+    alignItems: 'center',
+  },
+});
+
+const mapStateToProps = ({authResponse}) => {
+  const {loading, user} = authResponse;
+  return {loading, user};
+};
+
+export default connect(mapStateToProps, {register})(Register);

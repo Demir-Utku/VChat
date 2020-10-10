@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { TextInput } from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 
 const OutlinedInput = (props) => {
-
   return (
     <TextInput
-      mode='outlined'
+      mode="outlined"
       label={props.label}
       secureTextEntry={props.secureTextEntry}
       multiline={props.multiline}

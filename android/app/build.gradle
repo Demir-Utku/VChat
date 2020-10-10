@@ -146,6 +146,9 @@ android {
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
+    packagingOptions {
+        pickFirst '**/libjsc.so'
+    }
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -184,6 +187,9 @@ android {
 }
 
 dependencies {
+    // Make sure to put android-jsc at the the first
+    implementation "org.webkit:android-jsc:r245459"
+    
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
