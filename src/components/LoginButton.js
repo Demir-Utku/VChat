@@ -13,7 +13,8 @@ const LoginButton = (props) => (
   <TouchableOpacity
     activeOpacity={0.8}
     onPress={props.onPress}
-    style={[{
+    style={[
+      {
         backgroundColor: '#2C2F33',
         width: width * 0.9,
         height: height * 0.06,

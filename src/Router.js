@@ -194,7 +194,6 @@ const DrawerStackScreen = () => {
 };
 
 const RootStack = createStackNavigator();
-
 function Router() {
   return (
     <NavigationContainer ref={navigationRef}>

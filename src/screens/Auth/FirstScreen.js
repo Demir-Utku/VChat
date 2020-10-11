@@ -1,12 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  ActivityIndicator,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
 
 import RegisterButton from '../../components/RegisterButton';
 import LoginButton from '../../components/LoginButton';
@@ -18,14 +11,6 @@ const FirstScreen = (props) => {
   useEffect(() => {
     props.isUser();
   });
-
-  if (props.loading) {
-    return (
-      <View style={styles.activity}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
 
   return (
     <>

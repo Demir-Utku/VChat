@@ -15,24 +15,6 @@ export default class FlatListComponent extends Component {
   state = {
     text: '',
     contacts: data,
-    like: false,
-    color: 'white',
-  };
-
-  toggleLike = () => {
-    this.setState({
-      like: !this.state.like,
-    });
-
-    if (this.state.like) {
-      this.setState({
-        color: 'red',
-      });
-    } else {
-      this.setState({
-        color: 'white',
-      });
-    }
   };
 
   renderContactsItem = ({item, index, props}) => {
@@ -46,13 +28,9 @@ export default class FlatListComponent extends Component {
           <Text style={styles.lastName}>{item.last_name}</Text>
         </View>
         <Right style={styles.rightStyle}>
-          <TouchableWithoutFeedback onPress={this.toggleLike}>
-            <Icon
-              name="heart"
-              type="FontAwesome"
-              size={32}
-              style={styles.likeIcon}
-            />
+          {/* TODO: Add favorites */}
+          <TouchableWithoutFeedback>
+            <Icon name="heart" type="FontAwesome" size={32} />
           </TouchableWithoutFeedback>
         </Right>
       </View>
@@ -114,10 +92,6 @@ const styles = StyleSheet.create({
   },
   rightStyle: {
     justifyContent: 'center',
-  },
-  likeIcon: {
-    color: this.state.color === 'white' ? 'white' : 'red',
-    paddingRight: 10,
   },
   avatar: {
     width: 50,

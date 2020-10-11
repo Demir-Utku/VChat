@@ -96,21 +96,15 @@ export const addMessages = (path, params) => {
                   .doc(path)
                   .collection('items')
                   .doc(messageId)
-                  .update({image: imageURL})
-                  .then(() => {
-                    //dispatch({ type: ADD_MESSAGES_SUCCESS, payload: params })
-                  });
+                  .update({image: imageURL});
               });
             })
             .catch((error) => {
               console.log('Incorrect Image Upload: ', error);
             });
-        } else {
-          //dispatch({ type: ADD_MESSAGES_SUCCESS, payload: params })
         }
       })
       .catch(() => {
-        //dispatch({ type: ADD_MESSAGES_FAILED })
         console.log('Message not send!');
       });
   };

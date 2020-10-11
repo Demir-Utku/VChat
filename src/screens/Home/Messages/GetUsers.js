@@ -16,7 +16,7 @@ const GetUsers = (props) => {
         data={props.allUsers}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => {
-          console.log('Gelen user: ', item);
+          console.log('Coming user: ', item);
           return (
             <TouchableOpacity
               onPress={() => {
@@ -24,7 +24,6 @@ const GetUsers = (props) => {
                 const second_user = item;
                 const path = props.user.userName + '+' + second_user.userName;
                 const params = {
-                  //userName: props.user.userName,
                   createdDate: new Date(),
                   first_user: props.user,
                   second_user,

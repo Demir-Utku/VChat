@@ -5,6 +5,7 @@ export default class Favorites extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {/* TODO: Add favorite people in contact list */}
         <Text>I'm the Favorites component</Text>
       </View>
     );

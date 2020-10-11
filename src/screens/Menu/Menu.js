@@ -14,7 +14,7 @@ import ImagePicker from 'react-native-image-picker';
 
 import {Icon} from 'native-base';
 
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const Menu = (props) => {
   const [image, setImage] = useState(null);

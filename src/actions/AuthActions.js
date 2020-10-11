@@ -8,7 +8,6 @@ import {
 } from './types';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-
 import {Alert} from 'react-native';
 
 export const login = (params) => {
@@ -28,7 +27,7 @@ export const login = (params) => {
               .doc(uid)
               .get()
               .then((user) => {
-                console.log('Gelen Data: ', user._data);
+                console.log('Coming Data: ', user._data);
 
                 const userParams = {
                   ...user._data,
@@ -100,7 +99,7 @@ export const register = (params) => {
         Alert.alert('Warning', 'Please, write valid email address!');
       }
     } else {
-      Alert.alert('UYARI', 'Please, fill all parts!');
+      Alert.alert('Warning', 'Please, fill all parts!');
     }
   };
 };
@@ -110,7 +109,7 @@ export const isUser = () => {
     dispatch({type: LOGIN_START});
     auth().onAuthStateChanged((data) => {
       if (data) {
-        console.log('Gelen Değer:', data);
+        console.log('Coming Value:', data);
         const uid = data._user.uid;
         getUser(uid, dispatch);
       } else {
