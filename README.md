@@ -42,11 +42,15 @@ VChat is a simple messaging application.
 
 ## Photos from the Application
 
-<img src="src/images/initial_page.png" width="200">&nbsp; &nbsp; &nbsp; &nbsp; <img src="src/images/register.png" width="200">&nbsp; &nbsp; &nbsp; &nbsp; <img src="src/images/login.png" width="200">
+<img src="src/images/initial_page.png" width="200">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="src/images/register.png" width="200">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="src/images/login.png" width="200">
 
 <br>
 
-<img src="src/images/message.png" width="500">&nbsp; &nbsp; &nbsp; &nbsp; <img src="src/images/contacts.png" width="210">&nbsp; &nbsp; &nbsp; &nbsp; <img src="src/images/profile.png" width="200">
+<img src="src/images/message.png" width="500">
+
+<br>
+
+<img src="src/images/contacts.png" width="210">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="src/images/profile.png" width="200">
 
 <br>
 
